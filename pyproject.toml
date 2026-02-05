@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "znd"
+version = "0.0.0"
+description = "VOICEVOX CLI (znd)"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "voicevox-core==0.16.3",
+]
+
+[project.scripts]
+znd = "znd.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

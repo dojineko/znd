@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+voicevox_core/
+open_jtalk_dic_*/
+*.exe
+*.whl
+*.zip
+*.tar.gz
+*.wav
