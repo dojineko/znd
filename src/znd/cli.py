@@ -6,31 +6,16 @@ from pathlib import Path
 from .core import text_to_speech, get_default_paths, VoiceModelFile
 from .audio import play_wav
 
-ZUNDAMON_STYLES = {
-    'あまあま': 1,
-    'ノーマル': 3,
-    'normal': 3,
-    'ツンツン': 7,
-    'セクシー': 5,
-    'ささやき': 22,
-    'ヒソヒソ': 38,
-    'ヘロヘロ': 75,
-    'なみだめ': 76,
-}
-
 def list_styles_cmd():
     paths = get_default_paths()
     models_dir = paths['models_dir']
     if not models_dir.exists():
-        print(f"Error: Model directory not found at {models_dir}")
         return
-
-    print("=" * 70)
-    print("Available Voice Styles")
-    print("=" * 70)
 
     all_styles = []
     for vvm_file in sorted(models_dir.glob("*.vvm")):
+        if vvm_file.name.startswith("s"):
+            continue
         try:
             with VoiceModelFile.open(str(vvm_file)) as model:
                 for meta in model.metas:
@@ -39,19 +24,53 @@ def list_styles_cmd():
         except Exception:
             continue
 
-    all_styles.sort(key=lambda x: x[0])
+    all_styles.sort(key=lambda x: (x[1], x[0]))
     current_char = None
+    seen_styles = set()
     for style_id, char_name, style_name in all_styles:
+        key = (char_name, style_name)
+        if key in seen_styles:
+            continue
+        seen_styles.add(key)
+        
         if char_name != current_char:
             print(f"\n{char_name}:")
             current_char = char_name
-        print(f"  ID {style_id:4d}: {style_name}")
+        print(f"  ID {style_id:5d}: {style_name}")
+
+def find_style_id(speaker_name: str = None, style_name: str = None) -> int:
+    paths = get_default_paths()
+    models_dir = paths['models_dir']
+    
+    found_styles = []
+    for vvm_file in models_dir.glob("*.vvm"):
+        if vvm_file.name.startswith("s"):
+            continue
+        try:
+            with VoiceModelFile.open(str(vvm_file)) as model:
+                for meta in model.metas:
+                    if speaker_name and meta.name != speaker_name:
+                        continue
+                    for style in meta.styles:
+                        if not style_name or style.name == style_name:
+                            found_styles.append((style.id, meta.name, style.name))
+        except Exception:
+            continue
+    
+    if not found_styles:
+        print(f"Error: Style not found (speaker={speaker_name}, style={style_name})", file=sys.stderr)
+        sys.exit(1)
+
+    found_styles.sort(key=lambda x: x[0])
+    return found_styles[0][0]
 
 def main():
     parser = argparse.ArgumentParser(description='znd (VOICEVOX CLI)')
     parser.add_argument('text', nargs='?', help='Text to speak')
-    parser.add_argument('--list', '-l', action='store_true', help='List all available styles')
-    parser.add_argument('--style', '-s', choices=list(ZUNDAMON_STYLES.keys()), default='ノーマル')
+    parser.add_argument('--list', '-l', action='store_true', help='List styles')
+    parser.add_argument('--speaker', '-p', help='Speaker name')
+    parser.add_argument('--style', '-s', help='Style name')
+    parser.add_argument('--sid', type=int, help='Style ID')
     parser.add_argument('--speed', type=float, default=1.2)
     parser.add_argument('--volume', type=float, default=2.0)
     parser.add_argument('--output', '-o', type=Path)
@@ -68,13 +87,16 @@ def main():
         parser.print_help()
         sys.exit(0)
 
-    style_id = ZUNDAMON_STYLES.get(args.style, 3)
+    if args.sid is not None:
+        style_id = args.sid
+    else:
+        style_id = find_style_id(args.speaker or "ずんだもん", args.style or "ノーマル")
+
     tmp_path = None
     try:
-        if args.output:
-            output_path = args.output
-            should_play = False
-        else:
+        output_path = args.output
+        should_play = False
+        if not output_path:
             fd, path = tempfile.mkstemp(suffix='.wav')
             os.close(fd)
             tmp_path = Path(path)
