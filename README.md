@@ -100,3 +100,35 @@ znd "こんにちは" --output hello.wav
 **利用可能なスピーカーとスタイル:**
 `znd --list` を実行して、利用可能なすべてのスタイルIDと名称を確認できます。
 ずんだもん以外のキャラクターも、インストールされている音声モデル（.vvm）に応じて利用可能です（※ソングモデルには対応していません）。
+
+## おまけ: AIエージェントから利用する
+
+AIエージェントが `znd` を使ってタスク完了を通知するためのスキルを同梱しています。
+「終わったら教えて」や「長い処理が終わったら呼んで」と指示した際に、`znd` を使った音声通知が行われるようになります。
+ユーザー専用スキルとして利用するには、以下のコマンドでシンボリックリンクを作成してください。
+
+**Windows (PowerShell) の場合:**
+
+```powershell
+# Gemini CLI
+New-Item -ItemType SymbolicLink -Path "$HOME/.gemini/skills/znd" -Target "$PWD/skills/znd"
+
+# Claude Code
+New-Item -ItemType SymbolicLink -Path "$HOME/.claude/skills/znd" -Target "$PWD/skills/znd"
+
+# Codex
+New-Item -ItemType SymbolicLink -Path "$HOME/.agents/skills/znd" -Target "$PWD/skills/znd"
+```
+
+**macOS/Linux (Bash) の場合:**
+
+```bash
+# Gemini CLI
+ln -s "$PWD/skills/znd" "$HOME/.gemini/skills/znd"
+
+# Claude Code
+ln -s "$PWD/skills/znd" "$HOME/.claude/skills/znd"
+
+# Codex
+ln -s "$PWD/skills/znd" "$HOME/.agents/skills/znd"
+```
