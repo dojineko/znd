@@ -6,7 +6,7 @@
 
 ### 1. 前提条件
 
-- [Python 3.8+](https://www.python.org/)
+- [Python 3.10+](https://www.python.org/)
 - [git](https://git-scm.com/)
 
 ### 2. リポジトリの取得
@@ -42,24 +42,12 @@ chmod +x download-osx-arm64
 
 実行後、リポジトリ直下に `voicevox_core` ディレクトリが作成され、その中に必要なファイルがダウンロードされます。
 
-### 5. Python ライブラリのインストール
-
-環境に合わせた wheel ファイルを[公式リリース](https://github.com/VOICEVOX/voicevox_core/releases/tag/0.16.3)からダウンロードしてインストールしてください。
-
-- **Windows (x64)**: `voicevox_core-0.16.3-cp310-abi3-win_amd64.whl`
-- **macOS (Apple Silicon)**: `voicevox_core-0.16.3-cp310-abi3-macosx_11_0_arm64.whl`
-
-```bash
-# インストール例
-pip install https://github.com/VOICEVOX/voicevox_core/releases/download/[バージョン]/voicevox_core-[バージョン]+[デバイス]-cp310-abi3-[OS・アーキテクチャ].whl
-```
-
-### 6. znd コマンドのインストール
+### 5. znd コマンドのインストール
 
 プロジェクトを編集モードでインストールします。
 
 ```bash
-pip install -e .
+uv tool install -e .
 ```
 
 ## 使い方

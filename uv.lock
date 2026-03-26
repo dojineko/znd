@@ -1,0 +1,87 @@
+version = 1
+revision = 3
+requires-python = ">=3.10"
+resolution-markers = [
+    "sys_platform == 'win32'",
+    "platform_machine == 'arm64' and sys_platform == 'darwin'",
+    "platform_machine == 'x86_64' and sys_platform == 'darwin'",
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "(platform_machine != 'arm64' and platform_machine != 'x86_64' and sys_platform == 'darwin') or (platform_machine != 'aarch64' and platform_machine != 'x86_64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux' and sys_platform != 'win32')",
+]
+
+[[package]]
+name = "voicevox-core"
+version = "0.16.3"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_10_12_x86_64.whl" }
+resolution-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'darwin'",
+]
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:3c8697c7f218b707ef222944bec998f2711a1be976308be0bf43af1ae18d947b" },
+]
+
+[[package]]
+name = "voicevox-core"
+version = "0.16.3"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_11_0_arm64.whl" }
+resolution-markers = [
+    "platform_machine == 'arm64' and sys_platform == 'darwin'",
+]
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:8702717529257ba4e46379e9dd3a7145c831d397c467cd1770be249032d9edda" },
+]
+
+[[package]]
+name = "voicevox-core"
+version = "0.16.3"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_aarch64.whl" }
+resolution-markers = [
+    "platform_machine == 'aarch64' and sys_platform == 'linux'",
+]
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_aarch64.whl", hash = "sha256:2ad4127e6296a765a884f7dca64e295f2af924dd565eeff060dc430303b1c0e2" },
+]
+
+[[package]]
+name = "voicevox-core"
+version = "0.16.3"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_x86_64.whl" }
+resolution-markers = [
+    "platform_machine == 'x86_64' and sys_platform == 'linux'",
+]
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_x86_64.whl", hash = "sha256:96fb2611af6f57d88fcd60d453b47f75ded13840981db774e33821a43b83acfe" },
+]
+
+[[package]]
+name = "voicevox-core"
+version = "0.16.3"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-win_amd64.whl" }
+resolution-markers = [
+    "sys_platform == 'win32'",
+]
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-win_amd64.whl", hash = "sha256:0f8894fd9f394ef6785b818e59dd455e1f2d77c1402671f26f712d724dfa8836" },
+]
+
+[[package]]
+name = "znd"
+version = "0.0.0"
+source = { editable = "." }
+dependencies = [
+    { name = "voicevox-core", version = "0.16.3", source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_10_12_x86_64.whl" }, marker = "platform_machine == 'x86_64' and sys_platform == 'darwin'" },
+    { name = "voicevox-core", version = "0.16.3", source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_11_0_arm64.whl" }, marker = "platform_machine == 'arm64' and sys_platform == 'darwin'" },
+    { name = "voicevox-core", version = "0.16.3", source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_aarch64.whl" }, marker = "platform_machine == 'aarch64' and sys_platform == 'linux'" },
+    { name = "voicevox-core", version = "0.16.3", source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_x86_64.whl" }, marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
+    { name = "voicevox-core", version = "0.16.3", source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-win_amd64.whl" }, marker = "sys_platform == 'win32'" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "voicevox-core", marker = "platform_machine == 'arm64' and sys_platform == 'darwin'", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_11_0_arm64.whl" },
+    { name = "voicevox-core", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin'", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-macosx_10_12_x86_64.whl" },
+    { name = "voicevox-core", marker = "platform_machine == 'aarch64' and sys_platform == 'linux'", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_aarch64.whl" },
+    { name = "voicevox-core", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-manylinux_2_34_x86_64.whl" },
+    { name = "voicevox-core", marker = "sys_platform == 'win32'", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.3/voicevox_core-0.16.3-cp310-abi3-win_amd64.whl" },
+]
